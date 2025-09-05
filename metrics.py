@@ -40,7 +40,6 @@ def average_precision(pred, gt):
     prec, rec, _ = precision_recall_curve(y_true, y_score)
     return auc(rec, prec)
 
-# ---------- helpers for FROC ----------
 def _circularity(area, perimeter, eps=1e-6):
     # 4πA / P^2 in [0,1] for ideal circles
     return float(4.0 * math.pi * area / ((perimeter + eps) ** 2))
