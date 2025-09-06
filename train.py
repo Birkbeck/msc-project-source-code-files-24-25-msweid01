@@ -78,10 +78,10 @@ def main():
 
     model = HybridEffB3ViTUNet(num_classes=1).to(device)
     criterion = ComboLoss(
-        pos_weight=450.0,  # tune (100–500) depending on imbalance
-        alpha=0.2, beta=0.8,  # recall-friendly Tversky
-        weights=(1.0, 2.0, 1.0),  # BCE, Dice, Tversky weights
-        from_logits=False  # your model returns sigmoid probs
+        pos_weight=450.0,  
+        alpha=0.2, beta=0.8,
+        weights=(1.0, 2.0, 1.0),  
+        from_logits=False 
     )
     optimizer = Adam(model.parameters(), lr=args.lr)
     scheduler = CosineAnnealingLR(optimizer, T_max=args.epochs)
@@ -116,7 +116,7 @@ def main():
 
         scheduler.step()
 
-        # ---- Validation + logging
+
         val_dice, val_iou, val_auc = validate(model, val_loader, device, thr=args.thr)
         row = {
             "epoch": epoch,
